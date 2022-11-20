@@ -58,7 +58,7 @@
         <!-- /.login-logo -->
         <div class="card card-navy my-2">
           <div class="card-body">
-            <p class="login-box-msg">Please enter your credentials</p>
+            <p class="login-box-msg">Nhập thông tin tài khoản</p>
             <form id="ulogin-frm" action="" method="post">
               <div class="input-group mb-3">
                 <input type="text" class="form-control" name="email" autofocus placeholder="Email">
@@ -78,14 +78,14 @@
               </div>
               <div class="row">
                 <div class="col-8">
-                  <a href="./register.php">Create an Account</a>
+                  <a href="./register.php">Tạo tài khoản</a>
                 </div>
                 <!-- /.col -->
                 <div class="col-4">
                   <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                 </div>
                 <div class="col-12 text-center">
-                  <a href="<?= sc_url ?>admin">Admin Site</a>
+                  <a href="<?= sc_url ?>admin">Trang Admin</a>
                 </div>
                 <!-- /.col -->
               </div>

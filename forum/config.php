@@ -9,7 +9,7 @@ require_once('classes/DBConnection.php');
 require_once('classes/SystemSettings.php');
 $db = new DBConnection;
 $conn = $db->conn;
-function redirect($url=''){
+function redirectf($url=''){
 	if(!empty($url))
 	echo '<script>location.href="'.fr_url .$url.'"</script>';
 }

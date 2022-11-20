@@ -36,7 +36,7 @@
                       <a href="<?php echo sc_url ?>admin/?page=members" class="nav-link nav-members">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
-                          List of Members
+                          List Members
                         </p>
                       </a>
                     </li>

@@ -10,13 +10,13 @@ $link .= "://";
 $link .= $_SERVER['HTTP_HOST']; 
 $link .= $_SERVER['REQUEST_URI'];
 if(!isset($_SESSION['userdata']) && !strpos($link, 'login.php')){
-	redirect('admin/login.php');
+	redirects('admin/login.php');
 }
 if(isset($_SESSION['userdata']) && strpos($link, 'login.php')){
-	redirect('admin/index.php');
+	redirects('admin/index.php');
 }
 $module = array('','admin','staff','user');
 if(isset($_SESSION['userdata']) && (strpos($link, 'index.php') || strpos($link, 'admin/')) && $_SESSION['userdata']['type'] ==  3){
-	echo "<script>alert('Access Denied!');location.replace('".sc_url.$module[$_SESSION['userdata']['type']]."');</script>";
+	echo "<script>alert('Truy cập bị từ chối!');location.replace('".sc_url.$module[$_SESSION['userdata']['type']]."');</script>";
     exit;
 }

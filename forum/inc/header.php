@@ -51,7 +51,7 @@
     <!-- Toastr -->
     <script src="<?php echo ROOT ?>plugins/toastr/toastr.min.js"></script>
     <script>
-        var ROOT = '<?php echo ROOT ?>';
+        var _fr_url_ = '<?php echo fr_url ?>';
     </script>
     <script src="<?php echo ROOT ?>dist/js/script.js"></script>
     <script src="<?php echo ROOT ?>assets/js/scripts.js"></script>

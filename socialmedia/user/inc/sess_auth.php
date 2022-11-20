@@ -13,7 +13,7 @@ if(!isset($_SESSION['userdata']) && !strpos($link, 'login.php') && !strpos($link
 	redirects('user/login.php');
 }
 if(isset($_SESSION['userdata']) && strpos($link, 'login.php')){
-	redirect('user/index.php');
+	redirects('user/index.php');
 }
 $module = array('','admin','staff','user');
 if(isset($_SESSION['userdata']) && (strpos($link, 'index.php') || strpos($link, 'user/')) && $_SESSION['userdata']['login_type'] !=  3){
