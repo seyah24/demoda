@@ -44,9 +44,9 @@ class Login extends DBConnection {
 	
 	public function user_login(){
 		extract($_POST);
-		$stmt = $this->conn->prepare("SELECT * from member_list where `email` = ? and password = ? and `status` != 3 ");
+		$stmt = $this->conn->prepare("SELECT * from users where `username` = ? and password = ? and `status` != 3 ");
 		$password = md5($password);
-		$stmt->bind_param('ss',$email,$password);
+		$stmt->bind_param('ss',$username,$password);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		if($result->num_rows > 0){
@@ -61,7 +61,7 @@ class Login extends DBConnection {
 			$this->settings->set_userdata('login_type',3);
 		return json_encode(array('status'=>'success'));
 		}else{
-		return json_encode(array('status'=>'incorrect','last_qry'=>"SELECT * from member_list where `email` = '$email' and password = md5('$password') "));
+		return json_encode(array('status'=>'incorrect','last_qry'=>"SELECT * from users where `username` = '$username' and password = md5('$password') "));
 		}
 	}
 	public function user_logout(){
@@ -69,7 +69,7 @@ class Login extends DBConnection {
 			redirects('user/login.php');
 		}
 	}
-	function login_agent(){
+	/*function login_agent(){
 		extract($_POST);
 		$stmt = $this->conn->prepare("SELECT * from agent_list where email = ? and `password` = ? and delete_flag = 0 ");
 		$password = md5($password);
@@ -97,7 +97,7 @@ class Login extends DBConnection {
 			$resp['_error'] = $this->conn->error;
 		}
 		return json_encode($resp);
-	}
+	}*/
 	public function logout_agent(){
 		if($this->settings->sess_des()){
 			redirects('agent');

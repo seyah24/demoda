@@ -6,7 +6,7 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-window.addEventListener('DOMContentLoaded', event => {
+/*window.addEventListener('DOMContentLoaded', event => {
 
     const sidebarWrapper = document.getElementById('sidebar-wrapper');
     let scrollToTopVisible = false;
@@ -57,9 +57,9 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         }
     })
-})
+})*/
 
-function fadeOut(el) {
+/*function fadeOut(el) {
     el.style.opacity = 1;
     (function fade() {
         if ((el.style.opacity -= .1) < 0) {
@@ -80,4 +80,4 @@ function fadeIn(el, display) {
             requestAnimationFrame(fade);
         }
     })();
-};
+};*/
