@@ -2,7 +2,7 @@
 
 require_once('../../config.php');
 if(isset($_GET['id']) && $_GET['id'] > 0){
-    $qry = $conn->query("SELECT * from `category_list` where cateid = '{$_GET['id']}' ");
+    $qry = $conn->query("SELECT * from `category_list` where id = '{$_GET['id']}' ");
     if($qry->num_rows > 0){
         foreach($qry->fetch_assoc() as $k => $v){
             $$k=$v;
@@ -48,7 +48,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 dataType: 'json',
 				error:err=>{
 					console.log(err)
-					alert_toast("Có lỗi xảy ra",'error');
+					alert_toast("Có lỗi xảy ra_1",'error');
 					end_loader();
 				},
 				success:function(resp){
@@ -62,7 +62,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                             $("html, body").animate({ scrollTop: _this.closest('.card').offset().top }, "fast");
                             end_loader()
                     }else{
-						alert_toast("Có lỗi xảy ra",'error');
+						alert_toast("Có lỗi xảy ra_2",'error');
 						end_loader();
                         console.log(resp)
 					}

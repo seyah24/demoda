@@ -118,10 +118,18 @@ if(isset($_GET['id'])){
         $('.delete-comment').click(function(){
             _conf("Are your sure to delete this comment?", "delete_comment", [$(this).attr('data-id')])
         })
+
+        $('.edit_comment').click(function(){
+            uni_modal("Edit Comment","manage_comment.php?id="+$(this).attr('data-id'),'mid-large')
+        
+        })
+        $('.edit_reply').click(function(){
+            uni_modal("Edit Reply","manage_reply.php?id="+$(this).attr('data-id'),'mid-large')
+
         $('#delete_post').click(function(){
             _conf("Are your sure to delete this post?", "delete_post", ['<?= isset($id) ? $id : '' ?>'])
         })
-        
+
         $('#comment').summernote({
             height:"15em",
             placeholder:"Write your comment here",

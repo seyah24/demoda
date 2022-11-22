@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['id'])){
-    $qry = $conn->query("SELECT p.*, u.username, u.avatar, c.name as `category` FROM `post_list` p inner join category_list c on p.category_id = c.id inner join `users` u on p.user_id = u.id where p.id= '{$_GET['id']}'");
+    $qry = $conn->query("SELECT t.*, u.username, u.avatar, c.name as category FROM topic_list t inner join category_list c on t.category_id = c.id inner join users u on t.user_id = u.id where t.id= '{$_GET['id']}'");
     if($qry->num_rows > 0){
         foreach($qry->fetch_array() as $k => $v){
             if(!is_numeric($k)){
@@ -57,7 +57,7 @@ if(isset($_GET['id'])){
             <h4 class="font-weight-bolder">Comments:</h4>
             <div class="list-group comment-list mb-3 rounded-0">
                 <?php 
-                $comments = $conn->query("SELECT topic_com.*, username, avatar FROM topic_com inner join users on userid = uid where toid ='{$id}' order by abs(unix_timestamp(tc_date_created)) asc ");
+                $comments = $conn->query("SELECT t.*, u.username, u.avatar FROM topic_cmt t inner join users u on t.user_id = u.id where t.topic_id ='{$id}' order by abs(unix_timestamp(t.date_created)) asc");
                 while($row = $comments->fetch_assoc()):
                 ?>
                 <div class="list-group-item list-group-item-action mb-1 border-top">

@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['id'])){
-    $user = $conn->query("SELECT * FROM users where uid ='{$_GET['id']}' ");
+    $user = $conn->query("SELECT * FROM users where id ='{$_GET['id']}' ");
     foreach($user->fetch_array() as $k =>$v){
         $meta[$k] = $v;
     }
@@ -16,7 +16,7 @@ if(isset($_GET['id'])){
 		<div class="container-fluid">
 			<div id="msg"></div>
 			<form action="" id="manage-user">	
-				<input type="hidden" name="id" value="<?= isset($meta['uid']) ? $meta['id'] : '' ?>">
+				<input type="hidden" name="id" value="<?= isset($meta['id']) ? $meta['id'] : '' ?>">
 				<div class="form-group">
 					<label for="name">First Name</label>
 					<input type="text" name="firstname" id="firstname" class="form-control" value="<?php echo isset($meta['firstname']) ? $meta['firstname']: '' ?>" required>

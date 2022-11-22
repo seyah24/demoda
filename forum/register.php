@@ -180,7 +180,7 @@ function displayImg(input,_this) {
             contentType: false,
             error:err=>{
                 console.log(err)
-                alert('An error occurred')
+                alert('Ảnh avatar quá nặng, bạn kiên nhẫn chờ chút.')
                 end_loader()
             },
             success:function(resp){
@@ -192,7 +192,7 @@ function displayImg(input,_this) {
                     _this.prepend(el)
                     $('html, body').scrollTop(0)
                 }else{
-                    alert('An error occurred')
+                    alert('ID:004-forum')
                     console.log(resp)
                 }
                 end_loader()
