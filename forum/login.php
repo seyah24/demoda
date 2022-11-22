@@ -113,7 +113,7 @@
             contentType: false,
             error:err=>{
                 console.log(err)
-                alert('Có lỗi xảy ra')
+                alert('Có lỗi xảy ra_1')
                 end_loader()
             },
             success:function(resp){
@@ -125,7 +125,7 @@
                     _this.prepend(el)
                     $('html, body').scrollTop(0)
                 }else{
-                    alert('Có lỗi gì đó')
+                    alert('Có lỗi gì đó_2')
                     console.log(resp)
                 }
                 end_loader()

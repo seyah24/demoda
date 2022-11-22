@@ -75,19 +75,19 @@
         </div>
         <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-1 gx-2 gy-2">
             <?php 
-            $posts = $conn->query("SELECT topics.*, cate_name as category FROM topics inner join category_list on topics.cateid = category_list.cateid where to_status = 1  and to_delete_flag = 0 order by abs(unix_timestamp(to_date_created)) desc;");
+            $posts = $conn->query("SELECT t.*, c.name as category FROM topic_list t inner join category_list c on t.category_id = c.id where t.status = 1  and t.delete_flag = 0 order by abs(unix_timestamp(t.date_created)) desc;");
             while($row = $posts->fetch_assoc()):
             ?>
             <div class="col post-item">
-                <a href="./?p=posts/view_post&id=<?= $row['toid'] ?>" class="card rounded-0 shadow text-decoration-none text-reset">
+                <a href="./?p=posts/view_post&id=<?= $row['id'] ?>" class="card rounded-0 shadow text-decoration-none text-reset">
                     <div class="card-body">
                         <div class="mb-2 text-right">
                                 <small class="badge badge-light border text-dark rounded-pill px-3"><i class="far fa-circle"></i> <?= $row['category'] ?></small>
                         </div>
-                        <h3 class="card-title w-100 font-weight-bold"><?= $row['to_title'] ?></h3>
-                        <div class="card-text truncate-3 text-muted text-sm"><?= strip_tags($row['to_content']) ?></div>
+                        <h3 class="card-title w-100 font-weight-bold"><?= $row['title'] ?></h3>
+                        <div class="card-text truncate-3 text-muted text-sm"><?= strip_tags($row['content']) ?></div>
                         <div class="mb-2 text-right">
-                            <small class="text-muted"><i><?= date("Y-m-d h:i A", strtotime($row['to_date_created'])) ?></i></small>
+                            <small class="text-muted"><i><?= date("Y-m-d h:i A", strtotime($row['date_created'])) ?></i></small>
                         </div>
                     </div>
                 </a>

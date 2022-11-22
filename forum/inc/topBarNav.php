@@ -29,6 +29,7 @@
                         <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./?p=posts/manage_post"><i class="far fa-plus-square"></i> Add Post</a></li>
                         <?php endif; ?>
                     </ul>
+                    <!-- Navbar Login user-->
                     <div class="d-flex align-items-center">                      
                         <?php if($_settings->userdata('id') > 0 && $_settings->userdata('user_type') ==3): ?>
                           <div class="btn-group">
@@ -38,7 +39,7 @@
                               <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu" role="menu">
-                              <a class="dropdown-item" href="<?php echo fr_url.'./?p=user' ?>"><span class="fa fa-user"></span> My Account</a>
+                              <a class="dropdown-item" href="<?php echo fr_url.'./?p=user' ?>"><span class="fa fa-user"></span> Profile</a>
                               <div class="dropdown-divider"></div>
                               <a class="dropdown-item" href="<?php echo fr_url.'/classes/Login.php?f=logout_user' ?>"><span class="fas fa-sign-out-alt"></span> Đăng xuất</a>
                             </div>

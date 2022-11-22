@@ -45,7 +45,7 @@ Class Master extends DBConnection {
 				$data .= " `{$k}`='{$v}' ";
 			}
 		}
-		$check = $this->conn->query("SELECT * FROM `category_list` where `cate_name` = '{$name}' ".(!empty($id) ? " and cateid != {$id} " : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `category_list` where `name` = '{$name}' ".(!empty($id) ? " and id != {$id} " : "")." ")->num_rows;
 		if($this->capture_err())
 			return $this->capture_err();
 		if($check > 0){
@@ -57,7 +57,7 @@ Class Master extends DBConnection {
 		if(empty($id)){
 			$sql = "INSERT INTO `category_list` set {$data} ";
 		}else{
-			$sql = "UPDATE `category_list` set {$data} where cateid = '{$id}' ";
+			$sql = "UPDATE `category_list` set {$data} where id = '{$id}' ";
 		}
 			$save = $this->conn->query($sql);
 		if($save){
@@ -78,7 +78,7 @@ Class Master extends DBConnection {
 	}
 	function delete_category(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `category_list` set `cate_delete_flag` = 1 where cateid = '{$id}'");
+		$del = $this->conn->query("UPDATE `category_list` set `delete_flag` = 1 where cateid = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," category successfully deleted.");
@@ -108,9 +108,9 @@ Class Master extends DBConnection {
 			}
 		}
 		if(empty($id)){
-			$sql = "INSERT INTO `topics` set {$data} ";
+			$sql = "INSERT INTO `topic_list` set {$data} ";
 		}else{
-			$sql = "UPDATE `topics` set {$data} where toid = '{$id}' ";
+			$sql = "UPDATE `topic_list` set {$data} where id = '{$id}' ";
 		}
 			$save = $this->conn->query($sql);
 		if($save){
@@ -132,7 +132,7 @@ Class Master extends DBConnection {
 	}
 	function delete_post(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `topics` set `to_delete_flag` = 1 where toid = '{$id}'");
+		$del = $this->conn->query("UPDATE `topic_list` set `delete_flag` = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Post successfully deleted.");
@@ -157,18 +157,18 @@ Class Master extends DBConnection {
 			}
 		}
 		if(empty($id)){
-			$sql = "INSERT INTO `topic_com` set {$data} ";
+			$sql = "INSERT INTO `topic_cmt` set {$data} ";
 		}else{
-			$sql = "UPDATE `topic_com` set {$data} where tocomid = '{$id}' ";
+			$sql = "UPDATE `topic_cmt` set {$data} where topic_id = '{$id}' ";
 		}
 			$save = $this->conn->query($sql);
 		if($save){
 			$pid = !empty($id) ? $id : $this->conn->insert_id;
 			$resp['status'] = 'success';
 			if(empty($id))
-				$resp['msg'] = "New Comment successfully added.";
+				$resp['msg'] = "Thêm bình luận mới thành công.";
 			else
-				$resp['msg'] = " Comment successfully updated.";
+				$resp['msg'] = "Cập nhật bình luận thành công.";
 			
 		}else{
 			$resp['status'] = 'failed';
@@ -180,7 +180,7 @@ Class Master extends DBConnection {
 	}
 	function delete_comment(){
 		extract($_POST);
-		$del = $this->conn->query("DELETE FROM `topic_com` where tocomid = '{$id}'");
+		$del = $this->conn->query("DELETE FROM `topic_cmt` where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
 			$this->settings->set_flashdata('success'," Comment successfully deleted.");

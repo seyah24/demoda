@@ -35,23 +35,23 @@
         </div>
         <div class="accordion" id="categoryAccordion">
             <?php 
-            $categorys = $conn->query("SELECT * FROM `category_list` where cate_delete_flag = 0 and `cate_status` = 1 order by `cate_name` asc");
+            $categorys = $conn->query("SELECT * FROM `category_list` where delete_flag = 0 and `status` = 1 order by `name` asc");
             while($row = $categorys->fetch_assoc()):
             ?>
             <div class="card mb-0 rounded-0">
-                <div class="card-header" id="category<?= $row['cateid'] ?>">
+                <div class="card-header" id="category<?= $row['id'] ?>">
                     <h2 class="mb-0">
-                        <button class="btn btn-block text-left font-weight-bolder" type="button" data-toggle="collapse" data-target="#collapse<?= $row['cateid'] ?>" aria-expanded="false" aria-controls="collapse<?= $row['cateid'] ?>">
+                        <button class="btn btn-block text-left font-weight-bolder" type="button" data-toggle="collapse" data-target="#collapse<?= $row['id'] ?>" aria-expanded="false" aria-controls="collapse<?= $row['id'] ?>">
                         <div class="d-flex w-100 align-items-center justify-content-between">
-                            <?= $row['cate_name'] ?>
+                            <?= $row['name'] ?>
                             <i class="fa fa-plus font-size-3 collapse-icon"></i>
                         </div>
                         </button>
                     </h2>
                 </div>
-                <div id="collapse<?= $row['cateid'] ?>" class="collapse category_collapse" aria-labelledby="category<?= $row['cateid'] ?>" data-parent="#categoryAccordion">
+                <div id="collapse<?= $row['id'] ?>" class="collapse category_collapse" aria-labelledby="category<?= $row['id'] ?>" data-parent="#categoryAccordion">
                     <div class="card-body">
-                        <p><?= str_replace(["\n\r","\n","\r"], "<br/>", $row['cate_des']) ?></p>
+                        <p><?= str_replace(["\n\r","\n","\r"], "<br/>", $row['description']) ?></p>
                     </div>
                 </div>
             </div>

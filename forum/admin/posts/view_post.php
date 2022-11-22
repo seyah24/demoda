@@ -144,7 +144,7 @@ if(isset($_GET['id'])){
                 contentType: false,
                 error:err=>{
                     console.log(err)
-                    alert('An error occurred')
+                    alert('An error occurred_1')
                     end_loader()
                 },
                 success:function(resp){
@@ -156,7 +156,7 @@ if(isset($_GET['id'])){
                         _this.prepend(el)
                         $('html, body').scrollTop(_this.offset().top + 15)
                     }else{
-                        alert('An error occurred')
+                        alert('An error occurred_2')
                         console.log(resp)
                     }
                     end_loader()

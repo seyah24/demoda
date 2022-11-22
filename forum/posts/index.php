@@ -36,7 +36,7 @@
         </div>
         <div class="row row-cols-xl-4 row-cols-md-3 row-cols-sm-1 gx-2 gy-2">
             <?php 
-            $posts = $conn->query("SELECT p.*, c.name as `category` FROM `post_list` p inner join category_list c on p.category_id = c.id where p.user_id = '{$_settings->userdata('id')}' and p.`delete_flag` = 0 order by abs(unix_timestamp(p.date_created)) desc");
+            $posts = $conn->query("SELECT t.*, c.name as category FROM topic_list t inner join category_list c on t.category_id = c.id where t.user_id = '{$_settings->userdata('id')}' and t.delete_flag = 0 order by abs(unix_timestamp(t.date_created)) desc");
             while($row = $posts->fetch_assoc()):
             ?>
             <div class="col post-item">

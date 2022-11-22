@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['id'])){
-    $qry = $conn->query("SELECT * FROM `post_list` where id= '{$_GET['id']}' and user_id = '{$_settings->userdata('id')}'");
+    $qry = $conn->query("SELECT * FROM `topic_list` where id= '{$_GET['id']}' and user_id = '{$_settings->userdata('id')}'");
     if($qry->num_rows > 0){
         foreach($qry->fetch_array() as $k => $v){
             if(!is_numeric($k)){

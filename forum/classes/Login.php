@@ -13,7 +13,7 @@ class Login extends DBConnection {
 		parent::__destruct();
 	}
 	public function index(){
-		echo "<h1>Access Denied</h1> <a href='".base_url."'>Go Back.</a>";
+		echo "<h1>Access Denied</h1> <a href='".fr_url."'>Go Back.</a>";
 	}
 	public function login(){
 		extract($_POST);
@@ -38,12 +38,12 @@ class Login extends DBConnection {
 	}
 	public function logout(){
 		if($this->settings->sess_des()){
-			redirect('admin/login.php');
+			redirectf('admin/login.php');
 		}
 	}
 	function login_user(){
 		extract($_POST);
-		$stmt = $this->conn->prepare("SELECT * from users where username = ? and `password` = ? and `user_type` = 3 ");
+		$stmt = $this->conn->prepare("SELECT * from users where username = ? and `password` = ? and `type` = 3 ");
 		$password = md5($password);
 		$stmt->bind_param('ss',$username,$password);
 		$stmt->execute();
@@ -53,7 +53,7 @@ class Login extends DBConnection {
 			foreach($res as $k => $v){
 				$this->settings->set_userdata($k,$v);
 			}
-			$this->settings->set_userdata('login_type',2);
+			$this->settings->set_userdata('login_type',3);
 			$resp['status'] = 'success';
 		}else{
 		$resp['status'] = 'failed';
