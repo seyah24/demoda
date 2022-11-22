@@ -41,7 +41,7 @@ class Login extends DBConnection {
 			redirectf('admin/login.php');
 		}
 	}
-	function login_user(){
+	public function login_user(){
 		extract($_POST);
 		$stmt = $this->conn->prepare("SELECT * from users where username = ? and `password` = ? and `user_type` = 3 ");
 		$password = md5($password);
@@ -49,12 +49,25 @@ class Login extends DBConnection {
 		$stmt->execute();
 		$result = $stmt->get_result();
 		if($result->num_rows > 0){
-			$res = $result->fetch_array();
-			foreach($res as $k => $v){
-				$this->settings->set_userdata($k,$v);
+			$data = $result->fetch_array();
+			foreach($data as $k => $v){
+				if(!is_numeric($k) && $k != 'password'){
+					$this->settings->set_userdata($k,$v);
+				}
+
 			}
-			$this->settings->set_userdata('login_type',2);
-			$resp['status'] = 'success';
+			$this->settings->set_userdata('status',$data['status']);
+			$this->settings->set_userdata('login_type',3);
+		return json_encode(array('status'=>'success'));
+		}else{
+		return json_encode(array('status'=>'incorrect','last_qry'=>"SELECT * from users where `username` = '$username' and password = md5('$password') "));
+		}
+	}
+	public function user_logout(){
+		if($this->settings->sess_des()){
+			redirects('user/login.php');
+		}
+	}
 		}else{
 		$resp['status'] = 'Thất bại';
 		$resp['msg'] = 'Sai tài khoản hoặc mật khẩu';
