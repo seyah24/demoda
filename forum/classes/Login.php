@@ -13,7 +13,7 @@ class Login extends DBConnection {
 		parent::__destruct();
 	}
 	public function index(){
-		echo "<h1>Truy cập bị từ chối</h1> <a href='".fr_url."'>Quay lại.</a>";
+		echo "<h1>Access Denied</h1> <a href='".base_url."'>Go Back.</a>";
 	}
 	public function login(){
 		extract($_POST);
@@ -38,10 +38,10 @@ class Login extends DBConnection {
 	}
 	public function logout(){
 		if($this->settings->sess_des()){
-			redirectf('admin/login.php');
+			redirect('admin/login.php');
 		}
 	}
-	public function login_user(){
+	function login_user(){
 		extract($_POST);
 		$stmt = $this->conn->prepare("SELECT * from users where username = ? and `password` = ? and `user_type` = 3 ");
 		$password = md5($password);
@@ -49,31 +49,18 @@ class Login extends DBConnection {
 		$stmt->execute();
 		$result = $stmt->get_result();
 		if($result->num_rows > 0){
-			$data = $result->fetch_array();
-			foreach($data as $k => $v){
-				if(!is_numeric($k) && $k != 'password'){
-					$this->settings->set_userdata($k,$v);
-				}
-
+			$res = $result->fetch_array();
+			foreach($res as $k => $v){
+				$this->settings->set_userdata($k,$v);
 			}
-			$this->settings->set_userdata('status',$data['status']);
-			$this->settings->set_userdata('login_type',3);
-		return json_encode(array('status'=>'success'));
+			$this->settings->set_userdata('login_type',2);
+			$resp['status'] = 'success';
 		}else{
-		return json_encode(array('status'=>'incorrect','last_qry'=>"SELECT * from users where `username` = '$username' and password = md5('$password') "));
-		}
-	}
-	public function user_logout(){
-		if($this->settings->sess_des()){
-			redirects('user/login.php');
-		}
-	}
-		}else{
-		$resp['status'] = 'Thất bại';
-		$resp['msg'] = 'Sai tài khoản hoặc mật khẩu';
+		$resp['status'] = 'failed';
+		$resp['msg'] = 'Incorrect Email or Password';
 		}
 		if($this->conn->error){
-			$resp['status'] = 'Thất bại';
+			$resp['status'] = 'failed';
 			$resp['_error'] = $this->conn->error;
 		}
 		return json_encode($resp);

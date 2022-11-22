@@ -40,7 +40,7 @@
                             <div class="dropdown-menu" role="menu">
                               <a class="dropdown-item" href="<?php echo fr_url.'./?p=user' ?>"><span class="fa fa-user"></span> My Account</a>
                               <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="<?php echo ROOT.'/classes/Login.php?f=logout_user' ?>"><span class="fas fa-sign-out-alt"></span> Đăng xuất</a>
+                              <a class="dropdown-item" href="<?php echo fr_url.'/classes/Login.php?f=logout_user' ?>"><span class="fas fa-sign-out-alt"></span> Đăng xuất</a>
                             </div>
                         </div>
                         <?php else: ?>
