@@ -54,11 +54,11 @@
                     </div>
                     <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
+                        <span class="visually-hidden">Trước</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
+                        <span class="visually-hidden">Tiếp</span>
                     </button>
                     </div>
             </div>
@@ -66,7 +66,7 @@
         <div class="row justify-content-center my-4">
             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
                 <div class="input-group input-group-lg" id="search-field">
-                    <input type="search" class="form-control form-control-lg  rounded-pill" aria-label="Search Post Input" id="search" placeholder="Search post here">
+                    <input type="search" class="form-control form-control-lg  rounded-pill" aria-label="Search Post Input" id="search" placeholder="Tìm bài viết">
                     <div class="input-group-append">
                         <span class="input-group-text rounded-pill bg-transparent"><i class="fa fa-search"></i></span>
                     </div>

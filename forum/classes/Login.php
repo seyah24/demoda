@@ -43,7 +43,7 @@ class Login extends DBConnection {
 	}
 	function login_user(){
 		extract($_POST);
-		$stmt = $this->conn->prepare("SELECT * from users where username = ? and `password` = ? and `type` = 3 ");
+		$stmt = $this->conn->prepare("SELECT * from users where username = ? and `password` = ? and `type` <= 3 and `type` > 1");
 		$password = md5($password);
 		$stmt->bind_param('ss',$username,$password);
 		$stmt->execute();

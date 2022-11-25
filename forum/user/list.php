@@ -85,7 +85,7 @@
 <script>
 	$(document).ready(function(){
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this User permanently?","delete_user",[$(this).attr('data-id')])
+			_conf("Bạn có chắc muốn xoá Người dùng này vĩnh viễn?","delete_user",[$(this).attr('data-id')])
 		})
 		$('.table').dataTable({
 			columnDefs: [
@@ -103,14 +103,14 @@
 			data:{id: $id},
 			error:err=>{
 				console.log(err)
-				alert_toast("An error occured.",'error');
+				alert("ID:014-list/user",'error');
 				end_loader();
 			},
 			success:function(resp){
 				if(resp == 1){
 					location.reload();
 				}else{
-					alert_toast("An error occured.",'error');
+					alert("ID:015-list/user",'error');
 					end_loader();
 				}
 			}

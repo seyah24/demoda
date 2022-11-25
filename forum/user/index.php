@@ -140,7 +140,7 @@ foreach($user->fetch_array() as $k =>$v){
 				contentType: false,
 				error:err=>{
 					console.log(err)
-					alert('An error occurred')
+					alert('ID: 001-forum/user/index')
 					end_loader()
 				},
 				success:function(resp){
@@ -152,7 +152,7 @@ foreach($user->fetch_array() as $k =>$v){
 						_this.prepend(el)
 						$('html, body').scrollTop(0)
 					}else{
-						alert('An error occurred')
+						alert('ID: 002-forum/user/index')
 						console.log(resp)
 					}
 					end_loader()

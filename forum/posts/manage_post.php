@@ -108,7 +108,7 @@ if(isset($_GET['id'])){
                 contentType: false,
                 error:err=>{
                     console.log(err)
-                    alert('An error occurred')
+                    alert('ID:007-forum/posts/manage_post')
                     end_loader()
                 },
                 success:function(resp){
@@ -120,7 +120,7 @@ if(isset($_GET['id'])){
                         _this.prepend(el)
                         $('html, body').scrollTop(0)
                     }else{
-                        alert('An error occurred')
+                        alert('ID:008-forum/posts/manage_post')
                         console.log(resp)
                     }
                     end_loader()

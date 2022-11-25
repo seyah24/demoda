@@ -16,6 +16,7 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="<?php echo ROOT ?>plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
       <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo ROOT ?>assets/css/jquery-te-1.4.0.css">
   <link rel="stylesheet" href="<?php echo ROOT ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo ROOT ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?php echo ROOT ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -53,5 +54,5 @@
         var _fr_url_ = '<?php echo fr_url ?>';
     </script>
     <script src="<?php echo ROOT ?>dist/js/script.js"></script>
-    
+    <script src="<?php echo ROOT ?>assets/js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
   </head>

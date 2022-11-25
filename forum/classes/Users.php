@@ -69,7 +69,7 @@ Class Users extends DBConnection {
 			}
 
 		}else{
-			$qry = $this->conn->query("UPDATE users set $data where uid = {$id}");
+			$qry = $this->conn->query("UPDATE users set $data where id = {$id}");
 			if($qry){
 				$this->settings->set_flashdata('success','User Details successfully updated.');
 				foreach($_POST as $k => $v){
@@ -128,13 +128,14 @@ Class Users extends DBConnection {
 		}
 	}
 	function registration(){
+		//Registe and Update Account
 		if(!empty($_POST['password']))
 			$_POST['password'] = md5($_POST['password']);
 		else
 		unset($_POST['password']);
 		extract($_POST);
 		$data = "";
-		$check = $this->conn->query("SELECT * FROM `users` where username = '{$username}' ".($id > 0 ? " and uid!='{$id}'" : "")." ")->num_rows;
+		$check = $this->conn->query("SELECT * FROM `users` where username = '{$username}' ".($id > 0 ? " and id!='{$id}'" : "")." ")->num_rows;
 		if($check > 0){
 			$resp['status'] = 'failed';
 			$resp['msg'] = 'Username already exists.';
@@ -150,23 +151,26 @@ Class Users extends DBConnection {
 		if(empty($id)){
 			$sql = "INSERT INTO `users` set {$data} ";
 		}else{
-			$sql = "UPDATE `users` set {$data} where uid = '{$id}' ";
+			$sql = "UPDATE `users` set {$data} where id = '{$id}' ";
 		}
+		
 		$save = $this->conn->query($sql);
+
 		if($save){
 			$uid = !empty($id) ? $id : $this->conn->insert_id;
 			$resp['status'] = 'success';
-			if(!empty($id))
-				$resp['msg'] = 'User Details has been updated successfully';
-			else
-				$resp['msg'] = 'Your Account has been created successfully';
-
 			if(!empty($_FILES['img']['tmp_name'])){
+				
+				//Tạo folder avt
 				if(!is_dir(base_app."uploads/avatars"))
 					mkdir(base_app."uploads/avatars");
+				//tách đuôi file
 				$ext = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
+				//gắn tên file theo uid
 				$fname = "uploads/avatars/$uid.png";
+				//chỉ chọn file có đuôi jpeg hoặc png
 				$accept = array('image/jpeg','image/png');
+
 				if(!in_array($_FILES['img']['type'],$accept)){
 					$resp['msg'] = "Image file type is invalid";
 				}
@@ -182,12 +186,23 @@ Class Users extends DBConnection {
 				unlink(base_app.$fname);
 				$upload =imagepng($temp,base_app.$fname);
 				if($upload){
-					$this->conn->query("UPDATE `users` set `avatar` = CONCAT('{$fname}', '?v=',unix_timestamp(CURRENT_TIMESTAMP)) where uid = '{$uid}'");
+					$this->conn->query("UPDATE `users` set `avatar` = CONCAT('{$fname}', '?v=',unix_timestamp(CURRENT_TIMESTAMP)) where id = '{$uid}'");
 				}
 				imagedestroy($temp);
+
+			//Thông báo tạo acc 	
+			if(!empty($id))
+				// Update account
+				$resp['msg'] = 'User Details has been updated successfully';
+			else
+				// Register account
+				$resp['msg'] = 'Your Account has been created successfully';
+
+			
 			}
+
 			if(!empty($id)){
-				$user = $this->conn->query("SELECT * FROM `users` where uid = '{$id}' ");
+				$user = $this->conn->query("SELECT * FROM `users` where id = '{$id}' ");
 				if($user->num_rows > 0){
 					$res = $user->fetch_array();
 					foreach($res as $k => $v){

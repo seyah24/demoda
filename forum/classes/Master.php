@@ -64,9 +64,9 @@ Class Master extends DBConnection {
 			$bid = !empty($id) ? $id : $this->conn->insert_id;
 			$resp['status'] = 'success';
 			if(empty($id))
-				$resp['msg'] = "New Category successfully saved.";
+				$resp['msg'] = "Tạo thể loại mới thành công.";
 			else
-				$resp['msg'] = " Category successfully updated.";
+				$resp['msg'] = " Cập nhật thể loại thành công.";
 			
 		}else{
 			$resp['status'] = 'failed';
@@ -78,10 +78,10 @@ Class Master extends DBConnection {
 	}
 	function delete_category(){
 		extract($_POST);
-		$del = $this->conn->query("UPDATE `category_list` set `delete_flag` = 1 where cateid = '{$id}'");
+		$del = $this->conn->query("UPDATE `category_list` set `delete_flag` = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," category successfully deleted.");
+			$this->settings->set_flashdata('success'," Xoá thể loại thành công.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -118,9 +118,9 @@ Class Master extends DBConnection {
 			$resp['pid'] = $pid;
 			$resp['status'] = 'success';
 			if(empty($id))
-				$resp['msg'] = "New Post successfully saved.";
+				$resp['msg'] = "Tạo bài viết mới thành công.";
 			else
-				$resp['msg'] = " Post successfully updated.";
+				$resp['msg'] = " Cập nhật bài viết mới thành công.";
 			
 		}else{
 			$resp['status'] = 'failed';
@@ -135,7 +135,7 @@ Class Master extends DBConnection {
 		$del = $this->conn->query("UPDATE `topic_list` set `delete_flag` = 1 where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," Post successfully deleted.");
+			$this->settings->set_flashdata('success'," Bài viết xoá thành công.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;
@@ -183,7 +183,7 @@ Class Master extends DBConnection {
 		$del = $this->conn->query("DELETE FROM `topic_cmt` where id = '{$id}'");
 		if($del){
 			$resp['status'] = 'success';
-			$this->settings->set_flashdata('success'," Comment successfully deleted.");
+			$this->settings->set_flashdata('success'," Bình luận được cập nhật thành công.");
 		}else{
 			$resp['status'] = 'failed';
 			$resp['error'] = $this->conn->error;

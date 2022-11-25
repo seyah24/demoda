@@ -51,7 +51,7 @@
           
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
           </div>
           <div class="col-12 text-center">
             <a href="<?php echo fr_url ?>register.php">Tạo tài khoản</a>

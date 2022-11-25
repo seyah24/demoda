@@ -9,7 +9,7 @@
           <span class="info-box-text">Thể loại</span>
           <span class="info-box-number">
             <?php 
-              $category = $conn->query("SELECT * FROM category_list where cate_delete_flag = 0 and `cate_status` = 1")->num_rows;
+              $category = $conn->query("SELECT * FROM category_list where delete_flag = 0 and `status` = 1")->num_rows;
               echo format_num($category);
             ?>
             <?php ?>
@@ -27,7 +27,7 @@
           <span class="info-box-text">Registered Users</span>
           <span class="info-box-number">
             <?php 						
-              $user = $conn->query("SELECT * FROM users where `user_type` = 4 ")->num_rows;
+              $user = $conn->query("SELECT * FROM users where `type` = 4 ")->num_rows;
               echo format_num($user);
             ?>
             <?php ?>
@@ -46,7 +46,7 @@
           <span class="info-box-text">Published Topic</span>
           <span class="info-box-number">
             <?php 
-              $posts = $conn->query("SELECT * FROM topics where `to_status` = 1 and to_delete_flag = 0 ")->num_rows;
+              $posts = $conn->query("SELECT * FROM topic_list where `status` = 1 and delete_flag = 0 ")->num_rows;
               echo format_num($posts);
             ?>
             <?php ?>
@@ -65,7 +65,7 @@
           <span class="info-box-text">Unpublished Post</span>
           <span class="info-box-number">
             <?php 
-              $posts = $conn->query("SELECT * FROM topics where `to_status` = 0 and to_delete_flag = 0 ")->num_rows;
+              $posts = $conn->query("SELECT * FROM topic_list where `status` = 0 and delete_flag = 0 ")->num_rows;
               echo format_num($posts);
             ?>
             <?php ?>
@@ -86,7 +86,7 @@
             <span class="info-box-text">Total Members</span>
             <span class="info-box-number">
               <?php 
-                $member = $conn->query("SELECT * FROM users where `user_type` = 3")->num_rows;
+                $member = $conn->query("SELECT * FROM users where `type` = 3")->num_rows;
                 echo format_num($member);
               ?>
               <?php ?>
@@ -104,7 +104,7 @@
           <span class="info-box-text">Total Posts</span>
           <span class="info-box-number">
             <?php 
-              $posts = $conn->query("SELECT * FROM topics")->num_rows;
+              $posts = $conn->query("SELECT * FROM topic_list")->num_rows;
               echo format_num($posts);
             ?>
             <?php ?>
