@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['id'])){
-    $qry = $conn->query("SELECT p.*, u.username, u.avatar, c.name as `category` FROM `post_list` p inner join category_list c on p.category_id = c.id inner join `users` u on p.user_id = u.id where p.id= '{$_GET['id']}'");
+    $qry = $conn->query("SELECT t.*, u.username, u.avatar, c.name as category FROM topic_list t inner join category_list c on t.category_id = c.id inner join users u on t.user_id = u.id where t.id= '{$_GET['id']}'");
     if($qry->num_rows > 0){
         foreach($qry->fetch_array() as $k => $v){
             if(!is_numeric($k)){
@@ -25,7 +25,7 @@ if(isset($_GET['id'])){
 </style>
 <div class="card card-outline card-navy rounded-0 shadow">
     <div class="card-header">
-        <h4 class="card-title">Post Details</h4>
+        <h4 class="card-title">Nội dung topic</h4>
         <div class="card-tools">
             <a href="./?page=posts/manage_post&id=<?= $id ?>" class="btn btn-sm btn-flat bg-gradient-primary btn-primary"><i class="fa fa-edit"></i> Edit Post</a>
             <button type="button" id="delete_post" class="btn btn-sm btn-flat bg-gradient-danger btn-danger"><i class="fa fa-trash"></i> Delete</button>
@@ -36,9 +36,9 @@ if(isset($_GET['id'])){
             <?php if($_settings->userdata('id') == $user_id): ?>
             <div class="mb-2 text-right">
                 <?php if($status == 1): ?>
-                    <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Published</small>
+                    <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Xuất bản</small>
                 <?php else: ?>
-                    <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Unpublished</small>
+                    <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Chưa xuất bản</small>
                 <?php endif; ?>
             </div>
             <?php endif; ?>
@@ -57,7 +57,7 @@ if(isset($_GET['id'])){
             <h4 class="font-weight-bolder">Comments:</h4>
             <div class="list-group comment-list mb-3 rounded-0">
                 <?php 
-                $comments = $conn->query("SELECT topic_com.*, username, avatar FROM topic_com inner join users on userid = uid where toid ='{$id}' order by abs(unix_timestamp(tc_date_created)) asc ");
+                $comments = $conn->query("SELECT t.*, u.username, u.avatar FROM topic_cmt t inner join users u on t.user_id = u.id where t.topic_id ='{$id}' order by abs(unix_timestamp(t.date_created)) asc");
                 while($row = $comments->fetch_assoc()):
                 ?>
                 <div class="list-group-item list-group-item-action mb-1 border-top">
@@ -75,6 +75,7 @@ if(isset($_GET['id'])){
                     </div>
                     <hr>
                     <div><?= $row['comment'] ?></div>
+                    
                 </div>
                 <?php endwhile; ?>
             </div>
@@ -86,13 +87,13 @@ if(isset($_GET['id'])){
                     <div class="container-fluid">
                         <form action="" id="comment-form">
                             <input type="hidden" name="post_id" value="<?= $id ?>">
-                            <textarea class="form-control form-control-sm rouned-0" name="comment" id="comment" rows="4" placeholder="Write your comment here"></textarea>
+                            <textarea class="form-control form-control-sm rouned-0" name="comment" id="comment" rows="4" placeholder="Viết bình luận của bạn ở đây"></textarea>
                         </form>
                     </div>
                 </div>
                 <div class="card-footer py-1 text-right">
-                        <button class="btn btn-primary btn-flat btn-sm bg-gradient-primary" form="comment-form"><i class="fa fa-save"></i> Save</button>
-                        <button class="btn btn-light btn-flat btn-sm bg-gradient-light border" type="reset" form="comment-form">Cancel</button>
+                        <button class="btn btn-primary btn-flat btn-sm bg-gradient-primary" form="comment-form"><i class="fa fa-save"></i> Lưu</button>
+                        <button class="btn btn-light btn-flat btn-sm bg-gradient-light border" type="reset" form="comment-form">Bỏ</button>
                 </div>
             </div>
             <?php endif; ?>
@@ -102,10 +103,10 @@ if(isset($_GET['id'])){
 <script>
     $(function(){
         $('.delete-comment').click(function(){
-            _conf("Are your sure to delete this comment?", "delete_comment", [$(this).attr('data-id')])
+            _conf("Bạn có chắc muốn xoá bình luận này chứ?", "delete_comment", [$(this).attr('data-id')])
         })
         $('#delete_post').click(function(){
-            _conf("Are your sure to delete this post?", "delete_post", ['<?= isset($id) ? $id : '' ?>'])
+            _conf("Bạn có chắc muốn xoá bài viết này chứ?", "delete_post", ['<?= isset($id) ? $id : '' ?>'])
         })
         $('#comment').summernote({
             height:"15em",

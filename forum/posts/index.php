@@ -27,7 +27,7 @@
         <div class="row justify-content-center mb-4">
             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
                 <div class="input-group input-group-lg" id="search-field">
-                    <input type="search" class="form-control form-control-lg  rounded-pill" aria-label="Search Post Input" id="search" placeholder="Search post here">
+                    <input type="search" class="form-control form-control-lg  rounded-pill" aria-label="Search Post Input" id="search" placeholder="Tìm bài viết">
                     <div class="input-group-append">
                         <span class="input-group-text rounded-pill bg-transparent"><i class="fa fa-search"></i></span>
                     </div>
@@ -45,9 +45,9 @@
                         <div class="mb-2 text-right">
                             <small class="badge badge-light border text-dark rounded-pill px-3"><i class="far fa-circle"></i> <?= $row['category'] ?></small>
                             <?php if($row['status'] == 1): ?>
-                                <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Published</small>
+                                <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Xuất bản</small>
                             <?php else: ?>
-                                <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Unpublished</small>
+                                <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Chưa xuất bản</small>
                             <?php endif; ?>
                         </div>
                         <h3 class="card-title w-100 font-weight-bold"><?= $row['title'] ?></h3>
@@ -61,7 +61,7 @@
             <?php endwhile; ?>
         </div>
         <?php if($posts->num_rows <= 0): ?>
-            <h4 class="text-muted text-center"><i>You don't have post records yet</i></h4>
+            <h4 class="text-muted text-center"><i>Bạn chưa có bài viết nào cả.</i></h4>
         <?php endif; ?>
     </div>
 </section>

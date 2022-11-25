@@ -30,8 +30,8 @@ if(isset($_GET['id'])){
                 <h4 class="card-title">Nội dung topic</h4>
                 <?php if($_settings->userdata('id') == $user_id): ?>
                     <div class="card-tools">
-                        <a href="./?p=posts/manage_post&id=<?= $id ?>" class="btn btn-sm btn-flat bg-gradient-primary btn-primary"><i class="fa fa-edit"></i> Edit Post</a>
-                        <button type="button" id="delete_post" class="btn btn-sm btn-flat bg-gradient-danger btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                        <a href="./?p=posts/manage_post&id=<?= $id ?>" class="btn btn-sm btn-flat bg-gradient-primary btn-primary"><i class="fa fa-edit"></i> Sửa bài</a>
+                        <button type="button" id="delete_post" class="btn btn-sm btn-flat bg-gradient-danger btn-danger"><i class="fa fa-trash"></i> Xoá bài</button>
                     </div>
                 <?php endif; ?>
             </div>
@@ -40,9 +40,9 @@ if(isset($_GET['id'])){
                     <?php if($_settings->userdata('id') == $user_id): ?>
                     <div class="mb-2 text-right">
                         <?php if($status == 1): ?>
-                            <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Published</small>
+                            <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-primary"></i> Xuất bản</small>
                         <?php else: ?>
-                            <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Unpublished</small>
+                            <small class="badge badge-light border text-dark rounded-pill px-3"><i class="fa fa-circle text-secondary"></i> Chưa xuất bản</small>
                         <?php endif; ?>
                     </div>
                     <?php endif; ?>
@@ -58,7 +58,7 @@ if(isset($_GET['id'])){
                         <?= $content ?>
                     </div>
                     <hr class="mx-n3">
-                    <h4 class="font-weight-bolder">Bình luận:</h4>
+                    <h4 class="font-weight-bolder">Comments:</h4>
                     <div class="list-group comment-list mb-3 rounded-0">
                         <?php 
                         $comments = $conn->query("SELECT t.*, u.username, u.avatar FROM topic_cmt t inner join users u on t.user_id = u.id where t.topic_id ='{$id}' order by abs(unix_timestamp(t.date_created)) asc;");
@@ -76,12 +76,6 @@ if(isset($_GET['id'])){
                                     </div>
                                 </div>
                                 <?php if($row['user_id'] == $_settings->userdata('id')): ?>
-                                    <a href="javascript:void(0)" class="text-dark text-decoration-none p-2 reply-comment" data-id = '<?= $row['user_id'] ?>'><i class="fa fa-reply"></i></a>
-                                <?php endif; ?>
-                                <?php if($row['user_id'] == $_settings->userdata('id')): ?>
-                                    <a href="javascript:void(0)" class="text-dark text-decoration-none p-2 edit-comment" data-id = '<?= $row['user_id'] ?>'><i class="fa fa-pencil-alt"></i></a>
-                                <?php endif; ?>
-                                <?php if($row['user_id'] == $_settings->userdata('id')): ?>
                                     <a href="javascript:void(0)" class="text-danger text-decoration-none delete-comment" data-id = '<?= $row['user_id'] ?>'><i class="fa fa-trash"></i></a>
                                 <?php endif; ?>
                             </div>
@@ -91,20 +85,20 @@ if(isset($_GET['id'])){
                         <?php endwhile; ?>
                     </div>
                     <?php if($_settings->userdata('id') == ''): ?>
-                        <h5 class="text-center text-muted"><i>Đăng nhập để bình luận</i></h5>
+                        <h5 class="text-center text-muted"><i>Đăng nhập để Bình luận</i></h5>
                     <?php else: ?>
                     <div class="card rounded-0 shadow">
                         <div class="card-body">
                             <div class="container-fluid">
                                 <form action="" id="comment-form">
                                     <input type="hidden" name="topic_id" value="<?= $id ?>">
-                                    <textarea class="form-control form-control-sm rouned-0" name="comment" id="comment" rows="4" placeholder="Viết bình luận của bạn ở đây"></textarea>
+                                    <textarea class="form-control form-control-sm rouned-0" name="comment" id="comment" rows="4" placeholder="Write your comment here"></textarea>
                                 </form>
                             </div>
                         </div>
                         <div class="card-footer py-1 text-right">
                                 <button class="btn btn-primary btn-flat btn-sm bg-gradient-primary" form="comment-form"><i class="fa fa-save"></i> Lưu</button>
-                                <button class="btn btn-light btn-flat btn-sm bg-gradient-light border" type="reset" form="comment-form">Cancel</button>
+                                <button class="btn btn-light btn-flat btn-sm bg-gradient-light border" type="reset" form="comment-form">Bỏ</button>
                         </div>
                     </div>
                     <?php endif; ?>
@@ -116,15 +110,14 @@ if(isset($_GET['id'])){
 <script>
     $(function(){
         $('.delete-comment').click(function(){
-            _conf("Are your sure to delete this comment?", "delete_comment", [$(this).attr('data-id')])
+            _conf("Bạn có chắc muốn xoá bình luận này chứ?", "delete_comment", [$(this).attr('data-id')])
         })
         $('#delete_post').click(function(){
-            _conf("Are your sure to delete this post?", "delete_post", ['<?= isset($id) ? $id : '' ?>'])
+            _conf("Bạn có chắc muốn xoá bài viết này chứ?", "delete_post", ['<?= isset($id) ? $id : '' ?>'])
         })
-        
         $('#comment').summernote({
             height:"15em",
-            placeholder:"Write your comment here",
+            placeholder:"Viết bình luận ở đây",
             toolbar: [
                 [ 'style', [ 'style' ] ],
                 [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
@@ -159,7 +152,7 @@ if(isset($_GET['id'])){
                 contentType: false,
                 error:err=>{
                     console.log(err)
-                    alert('An error occurred_1')
+                    alert('ID:005-forum/posts/view_post')
                     end_loader()
                 },
                 success:function(resp){
@@ -171,7 +164,7 @@ if(isset($_GET['id'])){
                         _this.prepend(el)
                         $('html, body').scrollTop(_this.offset().top + 15)
                     }else{
-                        alert('An error occurred_2')
+                        alert('ID:006-forum/posts/view_post')
                         console.log(resp)
                     }
                     end_loader()
@@ -188,14 +181,14 @@ if(isset($_GET['id'])){
 			dataType:"json",
 			error:err=>{
 				console.log(err)
-				alert_toast("An error occured.",'error');
+				alert("ID:010-deletepost/forum/posts.",'error');
 				end_loader();
 			},
 			success:function(resp){
 				if(typeof resp== 'object' && resp.status == 'success'){
 					location.replace('./?p=posts');
 				}else{
-					alert_toast("An error occured.",'error');
+					alert("ID:011-deletepost/forum/posts.",'error');
 					end_loader();
 				}
 			}
@@ -211,14 +204,14 @@ if(isset($_GET['id'])){
 			dataType:"json",
 			error:err=>{
 				console.log(err)
-				alert_toast("An error occured.",'error');
+				alert("ID:012-deletecomment/forum/posts.",'error');
 				end_loader();
 			},
 			success:function(resp){
 				if(typeof resp== 'object' && resp.status == 'success'){
 					location.reload();
 				}else{
-					alert_toast("An error occured.",'error');
+					alert("ID:013-deletecomment/forum/posts.",'error');
 					end_loader();
 				}
 			}

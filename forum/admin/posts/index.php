@@ -34,7 +34,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT p.*, u.username from `post_list` p inner join users u on p.user_id = u.id where p.delete_flag = 0 order by abs(unix_timestamp(p.date_created)) desc ");
+						$qry = $conn->query("SELECT t.*, u.username from topic_list t inner join users u on t.user_id = u.id where t.delete_flag = 0 order by abs(unix_timestamp(t.date_created)) desc;");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>

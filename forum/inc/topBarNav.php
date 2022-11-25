@@ -24,14 +24,14 @@
                         <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./">Forum</a></li>
                         <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./?p=categories">Thể loại</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="./?p=about">About</a></li>
-                        <?php if($_settings->userdata('id') != '' && $_settings->userdata('user_type') ==3): ?>
-                        <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./?p=posts">My Posts</a></li>
-                        <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./?p=posts/manage_post"><i class="far fa-plus-square"></i> Add Post</a></li>
+                        <?php if($_settings->userdata('id') != '' && $_settings->userdata('user_type') <=3): ?>
+                        <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./?p=posts">Bài viết</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" aria-current="page" href="./?p=posts/manage_post"><i class="far fa-plus-square"></i> Tạo bài viết</a></li>
                         <?php endif; ?>
                     </ul>
                     <!-- Navbar Login user-->
                     <div class="d-flex align-items-center">                      
-                        <?php if($_settings->userdata('id') > 0 && $_settings->userdata('user_type') ==3): ?>
+                        <?php if($_settings->userdata('id') > 0 && $_settings->userdata('user_type') <=3): ?>
                           <div class="btn-group">
                             <button type="button" class="btn btn-rounded badge badge-light dropdown-toggle dropdown-icon user-dd" data-toggle="dropdown">
                               <span><img src="<?php echo validate_image($_settings->userdata('avatar')) ?>" class="img-circle elevation-2 user-img" alt="User Image"></span>

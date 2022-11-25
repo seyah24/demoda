@@ -22,7 +22,7 @@ class SystemSettings extends DBConnection{
 		// }
 	}
 	function update_system_info(){
-		$sql = "SELECT * FROM system_info where syid=1";
+		$sql = "SELECT * FROM system_info where sy_id=1";
 		$qry = $this->conn->query($sql);
 			while($row = $qry->fetch_assoc()){
 				if(isset($_SESSION['system_info'][$row['meta_field']]))unset($_SESSION['system_info'][$row['meta_field']]);
@@ -36,9 +36,9 @@ class SystemSettings extends DBConnection{
 			if(!in_array($key,array("content")))
 			if(isset($_SESSION['system_info'][$key])){
 				$value = str_replace("'", "&apos;", $value);
-				$qry = $this->conn->query("UPDATE system_info set meta_value = '{$value}' where syid=1 and meta_field = '{$key}' ");
+				$qry = $this->conn->query("UPDATE system_info set meta_value = '{$value}' where sy_id=1 and meta_field = '{$key}' ");
 			}else{
-				$qry = $this->conn->query("INSERT into system_info set syid= 1, meta_value = '{$value}', meta_field = '{$key}' ");
+				$qry = $this->conn->query("INSERT into system_info set sy_id= 1, meta_value = '{$value}', meta_field = '{$key}' ");
 			}
 		}
 		// if(isset($_POST['about_us'])){
@@ -69,10 +69,10 @@ class SystemSettings extends DBConnection{
 			$upload =imagepng($temp,base_app.$fname);
 			if($upload){
 				if(isset($_SESSION['system_info']['logo'])){
-					$qry = $this->conn->query("UPDATE system_info set meta_value = CONCAT('{$fname}', '?v=',unix_timestamp(CURRENT_TIMESTAMP)) where syid=1 and meta_field = 'logo' ");
+					$qry = $this->conn->query("UPDATE system_info set meta_value = CONCAT('{$fname}', '?v=',unix_timestamp(CURRENT_TIMESTAMP)) where sy_id=1 and meta_field = 'logo' ");
 					if(is_file(base_app.$_SESSION['system_info']['logo'])) unlink(base_app.$_SESSION['system_info']['logo']);
 				}else{
-					$qry = $this->conn->query("INSERT into system_info set syid=1, meta_value = '{$fname}',meta_field = 'logo' ");
+					$qry = $this->conn->query("INSERT into system_info set sy_id=1, meta_value = '{$fname}',meta_field = 'logo' ");
 				}
 			}
 			imagedestroy($temp);
@@ -98,10 +98,10 @@ class SystemSettings extends DBConnection{
 			$upload =imagepng($temp,base_app.$fname);
 			if($upload){
 				if(isset($_SESSION['system_info']['cover'])){
-					$qry = $this->conn->query("UPDATE system_info set meta_value = CONCAT('{$fname}', '?v=',unix_timestamp(CURRENT_TIMESTAMP)) where syid=1 and meta_field = 'cover' ");
+					$qry = $this->conn->query("UPDATE system_info set meta_value = CONCAT('{$fname}', '?v=',unix_timestamp(CURRENT_TIMESTAMP)) where sy_id=1 and meta_field = 'cover' ");
 					if(is_file(base_app.$_SESSION['system_info']['cover'])) unlink(base_app.$_SESSION['system_info']['cover']);
 				}else{
-					$qry = $this->conn->query("INSERT into system_info set syid=1, meta_value = '{$fname}',meta_field = 'cover' ");
+					$qry = $this->conn->query("INSERT into system_info set sy_id=1, meta_value = '{$fname}',meta_field = 'cover' ");
 				}
 			}
 			imagedestroy($temp);
